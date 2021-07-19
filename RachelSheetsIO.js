@@ -2,7 +2,7 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const random = require('random-js');
 const { Random } = require("random-js");
-const rachelHelper = require("./RachelHelpers.js");
+const rachelHelper = require("./RachelHelper.js");
 const creds = require('./client_secret.json');
 const { datastore_v1 } = require('./node_modules/googleapis/build/src/index.js');
 const doc = new GoogleSpreadsheet('1D1-YnwEgS7lki8TvF0DONm7dl4d--pE2ZShS9hsUmG8');
