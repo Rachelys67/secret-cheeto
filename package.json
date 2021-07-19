@@ -1,0 +1,18 @@
+{
+  "name": "reginald",
+  "version": "1.1.34",
+  "description": "task and recordkeeping bot for Juniper",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Juniper/Zaralys",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.3.1",
+    "google-spreadsheet": "^3.0.13",
+    "googleapis": "^39.2.0",
+    "node-schedule": "^1.3.2",
+    "random-js": "^2.1.0"
+  }
+}
