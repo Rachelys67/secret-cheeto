@@ -10,6 +10,7 @@ const doc = new GoogleSpreadsheet('1D1-YnwEgS7lki8TvF0DONm7dl4d--pE2ZShS9hsUmG8'
 const playerSheet = 0;
 
 async function initializeDataSource(sheetId) {
+    console.log("intializing...");
     await doc.useServiceAccountAuth({
         client_email: creds.client_email,
         private_key: creds.private_key,
@@ -46,20 +47,21 @@ async function getAllPlayers() {
 }
 
 async function removeAllPlayers() {
-    const dataStore = await retrieveDataSource(playerInformation);
+    const dataStore = await retrieveDataSource(playerSheet);
     for (var i = 0; i < dataStore.length; i++) {
         dataStore[i].delete();
     }
 }
 
 async function addPlayer(userName) {
-    const sheet = await initializeDataSource(playerInformation);
+    const sheet = await initializeDataSource(playerSheet);
+    console.log("initilized... updating...");
     var userToUpdate =
-        sheet.addRow({ UserName: userNamedominantUserName })
+        sheet.addRow({ Username: userName })
 }
 
 async function deleteUser(userName) {
-    const dataStore = await retrieveDataSource(playerInformation);
+    const dataStore = await retrieveDataSource(playerSheet);
     for (var i = 0; i < dataStore.length; i++) {
         if (dataStore[i]._rawData[0] == userName) {
             dataStore[i].delete();
