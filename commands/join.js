@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-var db = require("../RachelSheetIO.js");
+var db = require("../RachelSheetsIO.js");
 
 module.exports = {
     name: 'join',
