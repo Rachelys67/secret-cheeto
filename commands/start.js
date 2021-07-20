@@ -114,7 +114,7 @@ function runGame(discMsg) {
     });
 }
 
-runGame("abd");
+//runGame("abd");
 
 
 module.exports = {
