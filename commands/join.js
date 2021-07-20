@@ -20,13 +20,12 @@ module.exports = {
                 message.channel.send(msgEmbed);
             }
             else {
+                db.exportAddPlayer(targetID);
                 const msgEmbed = new Discord.MessageEmbed()
                     .setColor('#008000')
                     .addField("Welcome to the game nerd", ("Try not to kill any Liberals. You facist fuck."));
                 message.channel.send(msgEmbed);
-
             }
         });
-        db.exportAddPlayer(targetID);
     },
 };
