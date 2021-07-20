@@ -101,10 +101,10 @@ function runGame(discMsg) {
                 //the exclamation symbol comes if the user has a nickname on the server.
                 let id = str.replace(/[<@!>]/g, '');
                 let client = discMsg.channel.client;
-
-                console.log("sending role...");
+                let clientMsg = "Your role is..." + getRoleNameFromId(role, players.length);
+                console.log("sending role..." + clientMsg);
                 client.users.fetch(id).then(user => {
-                    user.send("Your role is..." + getRoleNameFromId(role, players.length));
+                    user.send(clientMsg);
                 });
             }
         }
