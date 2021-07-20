@@ -72,7 +72,17 @@ function runGame(discMsg) {
             for (var i = 0; i < players.length; i++) {
                 var role = assignRole(random, playersPicked, players.length);
                 playersPicked--;
-                console.log(players[i]._rawData[0] + " playing as..." + getRoleNameFromId(role, players.length));
+                //console.log(players[i]._rawData[0] + " playing as..." + getRoleNameFromId(role, players.length));
+
+                let str = players[i]._rawData[0]; //Just assuming some random tag.
+
+                //removing any sign of < @ ! >... 
+                //the exclamation symbol comes if the user has a nickname on the server.
+                let id = str.replace(/[<@!>]/g, '');
+                let client = discMsg.channel.client;
+                client.users.fetch(id).then(user => {
+                    user.send("Your role is..." + getRoleNameFromId(role, players.length));
+                });
             }
         }
         else {
@@ -88,6 +98,6 @@ module.exports = {
     execute(message, args) {
         const discCommand = message.content;
 
-        //runGame(message);
+        runGame(message);
     },
 };
