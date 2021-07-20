@@ -73,7 +73,7 @@ function runGame(discMsg) {
             for (var i = 0; i < players.length; i++) {
                 var role = assignRole(random, playersPicked, players.length);
                 playersPicked--;
-                //console.log(players[i]._rawData[0] + " playing as..." + getRoleNameFromId(role, players.length));
+                console.log(players[i]._rawData[0] + " playing as..." + getRoleNameFromId(role, players.length));
 
                 let str = players[i]._rawData[0]; //Just assuming some random tag.
                 console.log("player: " + str);
