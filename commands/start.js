@@ -20,6 +20,10 @@ function getRoleNameFromId(roleId, playerCount) {
 
 function checkValidRole(roleSelection, playerCount) {
 
+    console.log(currentFacists + " / " + maxFacists);
+    console.log(currentLiberals + " / " + maxLiberals);
+    console.log(roleSelection % 2);
+
     if ((roleSelection == playerCount)) {
         if (isCheetoSelected == 0) {
             isCheetoSelected++;
@@ -45,11 +49,24 @@ function checkValidRole(roleSelection, playerCount) {
 function assignRole(random, playerCount, maxPlayerCount) {
     var breakInCaseOfInfinity = 0;
     var cheetoSelected = isCheetoSelected;
-    role = parseInt(random.integer(1, playerCount));
-    while (checkValidRole(role, playerCount) == false) {
+    if (playerCount != 1) {
         role = parseInt(random.integer(1, playerCount));
-        breakInCaseOfInfinity++;
-        if (breakInCaseOfInfinity > 1000) break;
+        while (checkValidRole(role, playerCount) == false) {
+            role = parseInt(random.integer(1, playerCount));
+            breakInCaseOfInfinity++;
+            if (breakInCaseOfInfinity > 1000) break;
+        }
+    }
+    else {
+        if (isCheetoSelected == 0) {
+            isCheetoSelected = 1;
+        }
+        else if (currentLiberals < maxLiberals) {
+            role = 1;
+        }
+        else {
+            role = 2;
+        }
     }
     if (isCheetoSelected != cheetoSelected) role = maxPlayerCount;
     return role;
@@ -59,6 +76,8 @@ function determineMaxRoles(playerCount) {
     maxFacists = (Math.ceil(playerCount / 2) - 1)
     maxLiberals = playerCount - maxFacists;
     maxFacists--;
+    console.log(maxFacists);
+    console.log(maxLiberals);
 }
 
 function runGame(discMsg) {
@@ -81,7 +100,7 @@ function runGame(discMsg) {
                 //removing any sign of < @ ! >... 
                 //the exclamation symbol comes if the user has a nickname on the server.
                 let id = str.replace(/[<@!>]/g, '');
-                let client = discMsg.channel.client;
+               // let client = discMsg.channel.client;
 
                 console.log("sending role...");
                 client.users.fetch(id).then(user => {
@@ -94,6 +113,8 @@ function runGame(discMsg) {
         }
     });
 }
+
+runGame("abd");
 
 
 module.exports = {
