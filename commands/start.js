@@ -103,9 +103,8 @@ function runGame(discMsg) {
                 let client = discMsg.channel.client;
                 let clientMsg = "Your role is..." + getRoleNameFromId(role, players.length);
 
-                let embedMsg = new MessageEmbed()
-                    .setTitle("Role for new game")
-                    .setDescription(getRoleNameFromId(role, players.length))
+                let embedMsg = new Discord.MessageEmbed()
+                    .addField("Role for new game", getRoleNameFromId(role, players.length))
                     ;
                 console.log("sending role..." + clientMsg);
                 client.users.fetch(id).then(user => {
