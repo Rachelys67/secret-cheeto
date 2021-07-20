@@ -12,7 +12,7 @@ var currentLiberals = 0;
 var isCheetoSelected = 0;
 
 function getRoleNameFromId(roleId, playerCount) {
-    console.log(roleId);
+    //console.log(roleId);
     if (roleId == playerCount) return "Cheeto in Chief"
     else if ((roleId % 2)  == 1) return "Liberal";
     else if ((roleId % 2) == 0) return "Facist";
@@ -64,6 +64,7 @@ function determineMaxRoles(playerCount) {
 function runGame(discMsg) {
     const random = new Random();
     var playersPicked = 0;
+    console.log("starting game...");
     db.exportGetAllPlayers(function (players) {
         //console.log(discMsg);
         if (players.length >= 5) {
@@ -75,11 +76,14 @@ function runGame(discMsg) {
                 //console.log(players[i]._rawData[0] + " playing as..." + getRoleNameFromId(role, players.length));
 
                 let str = players[i]._rawData[0]; //Just assuming some random tag.
+                console.log("player: " + str);
 
                 //removing any sign of < @ ! >... 
                 //the exclamation symbol comes if the user has a nickname on the server.
                 let id = str.replace(/[<@!>]/g, '');
                 let client = discMsg.channel.client;
+
+                console.log("sending role...");
                 client.users.fetch(id).then(user => {
                     user.send("Your role is..." + getRoleNameFromId(role, players.length));
                 });
