@@ -100,7 +100,7 @@ function runGame(discMsg) {
                 //removing any sign of < @ ! >... 
                 //the exclamation symbol comes if the user has a nickname on the server.
                 let id = str.replace(/[<@!>]/g, '');
-               // let client = discMsg.channel.client;
+                let client = discMsg.channel.client;
 
                 console.log("sending role...");
                 client.users.fetch(id).then(user => {
