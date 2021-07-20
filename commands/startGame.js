@@ -66,7 +66,7 @@ function runGame(discMsg) {
     var playersPicked = 0;
     console.log("starting game...");
     db.exportGetAllPlayers(function (players) {
-        //console.log(discMsg);
+        console.log(players.length);
         if (players.length >= 5) {
             playersPicked = players.length;
             determineMaxRoles(players.length);
@@ -101,6 +101,7 @@ module.exports = {
     description: 'starts the active game',
     execute(message, args) {
         const discCommand = message.content;
+        console.log("hello??");
 
         runGame(message);
     },
