@@ -102,9 +102,14 @@ function runGame(discMsg) {
                 let id = str.replace(/[<@!>]/g, '');
                 let client = discMsg.channel.client;
                 let clientMsg = "Your role is..." + getRoleNameFromId(role, players.length);
+
+                let embedMsg = new MessageEmbed()
+                    .setTitle("Role for new game")
+                    .setDescription(getRoleNameFromId(role, players.length))
+                    ;
                 console.log("sending role..." + clientMsg);
                 client.users.fetch(id).then(user => {
-                    user.send(clientMsg);
+                    user.send(embedMsg);
                 });
             }
         }
