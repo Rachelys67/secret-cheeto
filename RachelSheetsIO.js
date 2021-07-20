@@ -41,9 +41,9 @@ async function queryUserInformation(userName, callback) {
     callback(filterData(dataStore, userName, 0));
 }
 
-async function getAllPlayers() {
+async function getAllPlayers(callback) {
     const dataStore = await retrieveDataSource(playerSheet);
-    return dataStore;
+    callback(dataStore);
 }
 
 async function removeAllPlayers() {
@@ -84,8 +84,8 @@ module.exports = {
     exportQueryInformation: function (userName, callback) {
         queryUserInformation(userName, callback);
     },
-    exportGetAllPlayers: function () {
-        getAllPlayers();
+    exportGetAllPlayers: function (callback) {
+        getAllPlayers(callback);
     },
     exportRemoveAllPlayers: function () {
         removeAllPlayers();
