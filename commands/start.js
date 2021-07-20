@@ -97,7 +97,7 @@ function runGame(discMsg) {
 
 
 module.exports = {
-    name: 'startGame',
+    name: 'start',
     description: 'starts the active game',
     execute(message, args) {
         const discCommand = message.content;
