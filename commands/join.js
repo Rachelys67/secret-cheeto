@@ -12,11 +12,21 @@ module.exports = {
     execute(message, args) {
         const discCommand = message.content;
         const targetID = message.author.id;;
-        db.exportAddPlayer(targetID);
+        db.exportQueryInformation(targetID, function (dataStore) {
+            if (dataStore != null) {
+                const msgEmbed = new Discord.MessageEmbed()
+                    .setColor('#008000')
+                    .addField("Are you a facist?", ("B/c joining more than once is cheating!"));
+                message.channel.send(msgEmbed);
+            }
+            else {
+                const msgEmbed = new Discord.MessageEmbed()
+                    .setColor('#008000')
+                    .addField("Welcome to the game nerd", ("Try not to kill any Liberals. You facist fuck."));
+                message.channel.send(msgEmbed);
 
-        const msgEmbed = new Discord.MessageEmbed()
-            .setColor('#008000')
-            .addField("Welcome to the game nerd", ("Try not to kill any Liberals. You facist fuck."));
-        message.channel.send(msgEmbed);
+            }
+        });
+        db.exportAddPlayer(targetID);
     },
 };
