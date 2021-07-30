@@ -11,6 +11,12 @@ var currentFacists = 0;
 var currentLiberals = 0;
 var isCheetoSelected = 0;
 const client = new Discord.Client();
+
+async function deleteMessages() {
+    const fetched = await channel.fetchMessages({ limit: 99 });
+    channel.bulkDelete(fetched);
+}
+
 module.exports = {
     name: 'place',
     description: 'places 1 card',
@@ -22,9 +28,7 @@ module.exports = {
             channel => channel.name.toLowerCase() === "current-board"
         )
         //let channel = message.guild.channels.find('name', 'current-board');
-
-        const fetched = await channel.fetchMessages({ limit: 99 });
-        channel.bulkDelete(fetched);
+        deleteMessages();
         //channel.send('test?');
     },
 };
