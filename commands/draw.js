@@ -18,6 +18,7 @@ module.exports = {
         const discCommand = message.content;
         console.log("hello??");
 
+        let client = discMsg.channel.client
         let facistMsg = new Discord.MessageEmbed()
             .setImage('../img/facisttile.png')
             .setTitle('Facist Card Drawn')
