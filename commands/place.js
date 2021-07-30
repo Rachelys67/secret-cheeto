@@ -20,7 +20,7 @@ async function deleteMessages(channel) {
 module.exports = {
     name: 'place',
     description: 'places 1 card',
-    execute(message, args) {
+    async execute(message, args) {
         const discCommand = message.content;
         console.log("hello??");
         //const channel = client.channels.cache.find(channel => channel.name === "current-board");
@@ -28,7 +28,7 @@ module.exports = {
             channel => channel.name.toLowerCase() === "current-board"
         )
         //let channel = message.guild.channels.find('name', 'current-board');
-        deleteMessages(channel);
-        //channel.send('test?');
+        await deleteMessages(channel);
+        channel.send('test?');
     },
 };
