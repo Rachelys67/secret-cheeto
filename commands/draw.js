@@ -27,6 +27,7 @@ module.exports = {
             .setImage('../img/liberaltile.png')
             .setTitle('Liberal Card Drawn')
             .setColor('#3275a8')
+            .addField("just a test", "okay")
             ;
         client.users.fetch(message.author.id).then(user => {
             user.send(liberalMsg);
