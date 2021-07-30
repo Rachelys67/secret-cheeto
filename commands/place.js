@@ -18,7 +18,10 @@ module.exports = {
         const discCommand = message.content;
         console.log("hello??");
         //const channel = client.channels.cache.find(channel => channel.name === "current-board");
-        let channel = message.guild.channels.find('name', 'current-board');
+        let channel = message.guild.channels.cache.find(
+            channel => channel.name.toLowerCase() === "current-board"
+        )
+        //let channel = message.guild.channels.find('name', 'current-board');
         channel.send('test?');
     },
 };
