@@ -20,15 +20,18 @@ module.exports = {
 
         let client = message.channel.client
         let facistMsg = new Discord.MessageEmbed()
-            .setImage('../img/facisttile.png')
+            .setImage('https://i.imgur.com/zMf4D4J.png')
             .setTitle('Facist Card Drawn')
             .setColor('#a83432')
             ;
         let liberalMsg = new Discord.MessageEmbed()
-            .setImage('../img/liberaltile.png')
+            .setImage('https://i.imgur.com/RQ40XLP.png')
             .setTitle('Liberal Card Drawn')
             .setColor('#3275a8')
             ;
+        client.users.fetch(message.author.id).then(user => {
+            user.send(facistMsg);
+        });
         client.users.fetch(message.author.id).then(user => {
             user.send(liberalMsg);
         });
