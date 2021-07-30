@@ -111,6 +111,7 @@ function runGame(discMsg) {
                     user.send(embedMsg);
                 });
             }
+            db.startGame();
         }
         else {
             throw new Error("not enough players...");
@@ -118,7 +119,17 @@ function runGame(discMsg) {
     });
 }
 
-//runGame("abd");
+
+function testClear() {
+   //db.startGame();
+    db.drawPolicy(function (cards) {
+        for (var j = 0; j < 3; j++) {
+            console.log("uhhh...???");
+            console.log(cards[j]);
+        }
+    });
+}
+//testClear();
 
 
 module.exports = {

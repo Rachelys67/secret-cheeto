@@ -11,7 +11,7 @@ module.exports = {
     description: 'adds new player!',
     execute(message, args) {
         const discCommand = message.content;
-        const targetID = message.author.id;;
+        const targetID = message.author.id;
         db.exportQueryInformation(targetID, function (dataStore) {
             if (dataStore != null) {
                 const msgEmbed = new Discord.MessageEmbed()

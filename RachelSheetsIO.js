@@ -8,6 +8,9 @@ const { datastore_v1 } = require('./node_modules/googleapis/build/src/index.js')
 const doc = new GoogleSpreadsheet('1D1-YnwEgS7lki8TvF0DONm7dl4d--pE2ZShS9hsUmG8');
 
 const playerSheet = 0;
+const policyDeck = 1;
+const policyInPlaySheet = 2;
+const configSheet = 3;
 
 async function initializeDataSource(sheetId) {
     console.log("intializing...");
@@ -60,16 +63,6 @@ async function addPlayer(userName) {
         sheet.addRow({ Username: userName })
 }
 
-async function deleteUser(userName) {
-    const dataStore = await retrieveDataSource(playerSheet);
-    for (var i = 0; i < dataStore.length; i++) {
-        if (dataStore[i]._rawData[0] == userName) {
-            dataStore[i].delete();
-        }
-    }
-
-}
-
 async function updateData(dataStore, userToUpdate) {
     var dataCount = dataStore.length;
     for (i = 0; i < dataCount; i++) {
@@ -78,6 +71,115 @@ async function updateData(dataStore, userToUpdate) {
             await dataStore[i].save();
         }
     }
+}
+
+async function clearData(sheetId) {
+    const dataStore = await retrieveDataSource(sheetId);
+    var dataCount = dataStore.length;
+    for (var i = dataCount; i > 0; i--) {
+        await dataStore[i - 1].delete();
+    }
+}
+
+async function setGameState(isRunning) {
+    const sheet = await initializeDataSource(configSheet);
+    const rows = await sheet.getRows();
+    if (isRunning == false) {
+        await rows[0].delete();
+    }
+    else {
+        var userToUpdate =
+            sheet.addRow({ GameRunning: "Yes" })
+    }
+}
+async function drawCommand(callback) {
+    const dataStore = await retrieveDataSource(policyDeck);
+    var dataCount = dataStore.length;
+    var cardsDrawn = [];
+    var dataIterator = dataCount;
+    console.log("picking cards...");
+    for (var j = 0; j < 3; j++) {
+        cardsDrawn[j] = await dataStore[dataIterator - 1]._rawData[1];
+        dataIterator--;
+    }
+
+    dataIterator = dataCount;
+    console.log("deleting cards...");
+    for (var j = 0; j < 3; j++) {
+        await dataStore[dataIterator - 1].delete();
+        dataIterator--;
+    }
+    callback(cardsDrawn);
+}
+
+async function DRAW(callback) {
+    const dataStore = await retrieveDataSource(policyDeck);
+    var dataCount = dataStore.length;
+    if (dataCount < 3) {
+        //Shuffle...
+        await calculatePolicyCount(async function (facistPolicies, liberalPolicies) {
+            await clearData(policyDeck);
+            await shuffleRemainingPolicies(facistPolicies, liberalPolicies);
+            await drawCommand(callback);
+        });
+    }
+    else {
+        drawCommand(callback);
+    }
+    //return cardsDrawn;
+}
+
+async function calculatePolicyCount(callback) {
+    const dataStore = await retrieveDataSource(policyInPlaySheet);
+    var dataCount = dataStore.length;
+    var liberalCount = 6;
+    var facistCount = 11;
+    for (var i = 0; i < dataCount; i++) {
+        if (await dataStore[i]._rawData[0] == "Liberal") {
+            liberalCount--;
+        }
+        if (await dataStore[i]._rawData[0] == "Facist") {
+            facistCount--;
+        }
+    }
+    callback(facistCount, liberalCount);
+}
+
+async function shuffleRemainingPolicies(facistPolicies, liberalPolicies) {
+    const sheet = await initializeDataSource(policyDeck);
+    var policyCount = liberalPolicies + facistPolicies;
+    var chosenCard = false;
+    var breakVar = 0;
+    const random = new Random();
+    for (var i = 0; i < policyCount; i++) {
+        chosenCard = false;
+        breakVar = 0;
+        while (chosenCard == false) {
+            var currentPolicyCount = liberalPolicies + facistPolicies;
+            cardType = parseInt(random.integer(1, 100));
+            var chanceOfLiberal = ((liberalPolicies / currentPolicyCount) * 100);
+            if (breakVar > 1000) return;
+            else breakVar++;
+            console.log(cardType.toString() + "< " + chanceOfLiberal.toString());
+            if ((cardType < chanceOfLiberal) && (liberalPolicies > 0)) {
+                liberalPolicies--;
+                await sheet.addRow({ CardNum: (i + 1), Policy: 'Liberal' });
+                chosenCard = true;
+            }
+            else if (facistPolicies > 0) {
+                facistPolicies--;
+                await sheet.addRow({ CardNum: (i + 1), Policy: 'Facist' });
+                chosenCard = true;
+            }
+        }
+    }
+}
+
+async function playPolicy(policyName) {
+    const sheet = await initializeDataSource(policyInPlaySheet);
+    console.log("initilized... updating...");
+    var userToUpdate =
+        sheet.addRow({ Policy: policyName })
 }
 
 module.exports = {
@@ -92,5 +194,37 @@ module.exports = {
     },
     exportAddPlayer: function (username) {
         addPlayer(username);
+    },
+    drawPolicy: function (callback) {
+        return DRAW(callback);
+    },
+    resetGame: function () {
+        clearData(playerSheet);
+        clearData(policyDeck);
+        clearData(policyInPlaySheet);
+        setGameState(false);
+    },
+    startGame: function () {
+        setGameState(true);
+        shuffleRemainingPolicies(11, 6);
+    },
+    shufflePolicies: function (policiesInPlay) {
+        var facistPolicies = 11;
+        var liberalPolicies = 6;
+        if (policiesInPlay.length > 0) {
+            for (i = 0; i < policiesInPlay.length; i++) {
+                if (policiesInPlay[0] == 'Facist') {
+                    facistPolicies--;
+                }
+                else {
+                    liberalPolicies--;
+                }
+            }
+        }
+        clearData(policyDeck);
+        shuffleRemainingPolicies(facistPolicies, liberalPolicies);
+    },
+    expPlayPolicy: function (policyName) {
+        playPolicy(policyName);
     }
 };
