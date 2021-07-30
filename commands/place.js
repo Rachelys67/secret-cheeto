@@ -22,6 +22,9 @@ module.exports = {
             channel => channel.name.toLowerCase() === "current-board"
         )
         //let channel = message.guild.channels.find('name', 'current-board');
-        channel.send('test?');
+
+        const fetched = await channel.fetchMessages({ limit: 99 });
+        channel.bulkDelete(fetched);
+        //channel.send('test?');
     },
 };
