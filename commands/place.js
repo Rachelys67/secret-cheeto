@@ -10,7 +10,7 @@ var maxLiberals = 0;
 var currentFacists = 0;
 var currentLiberals = 0;
 var isCheetoSelected = 0;
-
+const client = new Discord.Client();
 module.exports = {
     name: 'place',
     description: 'places 1 card',
@@ -18,6 +18,6 @@ module.exports = {
         const discCommand = message.content;
         console.log("hello??");
 
-        message.channel.client.get('current-board').send('test?');
+        client.get('current-board').send('test?');
     },
 };
