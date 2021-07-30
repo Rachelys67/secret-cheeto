@@ -80,6 +80,12 @@ async function determineFacistLink(facistPolicies) {
     return returnURL;
 }
 
+async function testMe() {
+    await db.expPlayPolicy("Liberal");
+}
+
+//testMe();
+
 module.exports = {
     name: 'place',
     description: 'places 1 card',
@@ -110,8 +116,10 @@ module.exports = {
         )
         //let channel = message.guild.channels.find('name', 'current-board');
         await deleteMessages(channel);
+        console.log("exp...");
         //channel.send('test?');
         await db.expPlayPolicy(policyName);
+        console.log("do we error before or after???");
 
         var liberalLink = "";
         var facistLink = "";
@@ -132,7 +140,8 @@ module.exports = {
                 liberalLink = "https://i.imgur.com/iIKsWmn.png";
             }
             facistLink = await determineFacistLink(facistPolicies);
-        })
+            console.log(facistLink);
+        });
         
 
 
