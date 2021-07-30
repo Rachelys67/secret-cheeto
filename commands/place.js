@@ -86,6 +86,23 @@ module.exports = {
     async execute(message, args) {
         const discCommand = message.content;
         console.log("hello??");
+
+        const issuedCommand = discCommand.split(" ");
+        if (issuedCommand.length < 2) {
+
+            const msgEmbed = new Discord.MessageEmbed()
+                .setColor('#008000')
+                .addField("Disallowed!", "You MUST put a policy of Facist or Liberal");
+            message.channel.send(msgEmbed);
+        }
+        var policyName = issuedCommand[1];
+        if (policyName != "Liberal" || policyName != "Facist") {
+
+            const msgEmbed = new Discord.MessageEmbed()
+                .setColor('#008000')
+                .addField("Disallowed!", "You MUST put a policy of Facist or Liberal");
+            message.channel.send(msgEmbed);
+        }
         //const channel = client.channels.cache.find(channel => channel.name === "current-board");
         let channel = message.guild.channels.cache.find(
             channel => channel.name.toLowerCase() === "current-board"
