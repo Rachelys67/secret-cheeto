@@ -21,7 +21,7 @@ async function determineFacistLink(facistPolicies, callback) {
                 returnURL = "https://i.imgur.com/VWimQ3B.jpeg";
             }
             else if (facistPolicies == 1) {
-                returnURL = "https://i.imgur.com/Cxd4UnA.jpeg";
+                returnURL = "https://i.imgur.com/OJjC5x1.png";
             }
             else if (facistPolicies == 2) {
                 returnURL = "https://i.imgur.com/RlkcVfQ.jpeg";
