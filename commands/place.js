@@ -114,7 +114,7 @@ module.exports = {
 
         var liberalLink = "";
         var facistLink = "";
-        db.getPolicyCounts(function (liberalPolicies, facistPolicies) {
+        db.getPolicyCounts(async function (liberalPolicies, facistPolicies) {
             if (liberalPolicies == 0) {
                 liberalLink = "https://i.imgur.com/FlmXDry.png";
             }
