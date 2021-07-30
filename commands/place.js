@@ -37,22 +37,22 @@ async function determineFacistLink(facistPolicies) {
         }
         else if (playerCount > 6) {
             if (facistPolicies == 0) {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/8okOSTE.png";
             }
             else if (facistPolicies == 1) {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/QgETC64.png";
             }
             else if (facistPolicies == 2) {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/yqCSuCy.png";
             }
             else if (facistPolicies == 3) {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/9ZTQOrR.png";
             }
             else if (facistPolicies == 4) {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/sHm76Cf.png";
             }
             else {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/d4ayrUT.png";
             }
         }
         else {
@@ -76,15 +76,8 @@ async function determineFacistLink(facistPolicies) {
             }
         }
     });
-    returnURL = "https://i.imgur.com/zMf4D4J.png"
     return returnURL;
 }
-
-async function testMe() {
-    await db.expPlayPolicy("Liberal");
-}
-
-//testMe();
 
 module.exports = {
     name: 'place',
