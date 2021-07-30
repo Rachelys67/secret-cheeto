@@ -13,7 +13,7 @@ var isCheetoSelected = 0;
 const client = new Discord.Client();
 
 async function deleteMessages(channel) {
-    const fetched = await channel.fetchMessages({ limit: 99 });
+    const fetched = await channel.messages.fetchMessages({ limit: 99 });
     channel.bulkDelete(fetched);
 }
 
