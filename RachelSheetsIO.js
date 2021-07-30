@@ -224,7 +224,7 @@ module.exports = {
         clearData(policyDeck);
         shuffleRemainingPolicies(facistPolicies, liberalPolicies);
     },
-    expPlayPolicy: function (policyName) {
-        playPolicy(policyName);
+    expPlayPolicy: async function (policyName) {
+        await playPolicy(policyName);
     }
 };

@@ -4,17 +4,80 @@ var db = require("../RachelSheetsIO.js");
 const random = require('random-js');
 const { Random } = require("random-js");
 
-
-var maxFacists = 0;
-var maxLiberals = 0;
-var currentFacists = 0;
-var currentLiberals = 0;
-var isCheetoSelected = 0;
-const client = new Discord.Client();
-
 async function deleteMessages(channel) {
     const fetched = await channel.messages.fetch({ limit: 99 });
     channel.bulkDelete(fetched);
+}
+
+async function determineFacistLink(facistPolicies) {
+    //get # players
+    var returnURL = "";
+    db.exportGetAllPlayers(function (players) {
+        //determine board state based on players & policies
+        var playerCount = players.length;
+        if (playerCount > 8) {
+            if (facistPolicies == 0) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 1) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 2) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 3) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 4) {
+                returnURL = "";
+            }
+            else {
+                returnURL = "";
+            }
+        }
+        else if (playerCount > 6) {
+            if (facistPolicies == 0) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 1) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 2) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 3) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 4) {
+                returnURL = "";
+            }
+            else {
+                returnURL = "";
+            }
+        }
+        else {
+            if (facistPolicies == 0) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 1) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 2) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 3) {
+                returnURL = "";
+            }
+            else if (facistPolicies == 4) {
+                returnURL = "";
+            }
+            else {
+                returnURL = "";
+            }
+        }
+    });
+    returnURL = "https://i.imgur.com/zMf4D4J.png"
+    return returnURL;
 }
 
 module.exports = {
@@ -29,6 +92,44 @@ module.exports = {
         )
         //let channel = message.guild.channels.find('name', 'current-board');
         await deleteMessages(channel);
-        channel.send('test?');
+        //channel.send('test?');
+        await db.expPlayPolicy(policyName);
+
+        var liberalLink = "";
+        var facistLink = "";
+        db.getPolicyCounts(function (liberalPolicies, facistPolicies) {
+            if (liberalPolicies == 0) {
+                liberalLink = "https://i.imgur.com/FlmXDry.png";
+            }
+            else if (liberalPolicies == 1) {
+                liberalLink = "https://i.imgur.com/MVLjFiP.png";
+            }
+            else if (liberalPolicies == 2) {
+                liberalLink = "https://i.imgur.com/e0XaSbu.png";
+            }
+            else if (liberalPolicies == 3) {
+                liberalLink = "https://i.imgur.com/dFEkcBU.png";
+            }
+            else {
+                liberalLink = "https://i.imgur.com/iIKsWmn.png";
+            }
+            facistLink = await determineFacistLink(facistPolicies);
+        })
+        
+
+
+        let facistMsg = new Discord.MessageEmbed()
+            .setImage(facistLink)
+            .setTitle('Current Facist Board')
+            .setColor('#a83432')
+            ;
+
+        let liberalMsg = new Discord.MessageEmbed()
+            .setImage(liberalLink)
+            .setTitle('Current Liberal Board')
+            .setColor('#3275a8')
+            ;
+        channel.send(facistMsg);
+        channel.send(liberalMsg);
     },
 };
