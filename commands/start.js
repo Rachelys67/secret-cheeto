@@ -112,6 +112,7 @@ function runGame(discMsg) {
                 });
             }
             db.startGame();
+
         }
         else {
             throw new Error("not enough players...");
@@ -129,16 +130,50 @@ function testClear() {
         }
     });
 }
+
+async function deleteMessages(channel) {
+    const fetched = await channel.messages.fetch({ limit: 99 });
+    channel.bulkDelete(fetched);
+}
 //testClear();
 
 
 module.exports = {
     name: 'start',
     description: 'starts the active game',
-    execute(message, args) {
+    async execute(message, args) {
         const discCommand = message.content;
-        console.log("hello??");
 
         runGame(message);
+        var liberalLink = "https://i.imgur.com/FlmXDry.png";
+        //const channel = client.channels.cache.find(channel => channel.name === "current-board");
+        let channel = message.guild.channels.cache.find(
+            channel => channel.name.toLowerCase() === "current-board"
+        );
+        await deleteMessages(channel);
+
+        let liberalMsg = new Discord.MessageEmbed()
+            .setImage(liberalLink)
+            .setTitle('Current Liberal Board')
+            .setColor('#3275a8')
+            ;
+        channel.send(liberalMsg);
+
+        db.exportGetAllPlayers(function (players) {
+            var playerCount = players.length;
+            if (playerCount > 8) {
+                returnURL = "https://i.imgur.com/VWimQ3B.jpeg";
+            }
+            else if (playerCount > 6) {
+                returnURL = "https://i.imgur.com/8okOSTE.png";
+            }
+
+            let facistMsg = new Discord.MessageEmbed()
+                .setImage(returnURL)
+                .setTitle('Current Facist Board')
+                .setColor('#a83432')
+                ;
+            channel.send(facistMsg);
+        });
     },
 };

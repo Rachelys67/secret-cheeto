@@ -15,7 +15,6 @@ async function determineFacistLink(facistPolicies, callback) {
     db.exportGetAllPlayers(function (players) {
         //determine board state based on players & policies
         var playerCount = players.length;
-        console.log(playerCount);
         if (playerCount > 8) {
             if (facistPolicies == 0) {
                 returnURL = "https://i.imgur.com/VWimQ3B.jpeg";
@@ -76,9 +75,6 @@ async function determineFacistLink(facistPolicies, callback) {
                 returnURL = "";
             }
         }
-        console.log(playerCount);
-        console.log(facistPolicies);
-        console.log(returnURL);
         callback(returnURL);
     });
 }
@@ -113,7 +109,6 @@ module.exports = {
         )
         //let channel = message.guild.channels.find('name', 'current-board');
         await deleteMessages(channel);
-        console.log("exp...");
         //channel.send('test?');
         await db.expPlayPolicy(policyName, function () {
             db.getPolicyCounts(async function (facistPolicies, liberalPolicies) {
@@ -150,12 +145,5 @@ module.exports = {
                 channel.send(liberalMsg);
             });
         });
-        console.log("do we error before or after???");
-
-        var liberalLink = "";
-        var facistLink = "";
-        
-
-
     },
 };
