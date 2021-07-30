@@ -29,21 +29,20 @@ module.exports = {
             .setTitle('Liberal Card Drawn')
             .setColor('#3275a8')
             ;
-        client.users.fetch(message.author.id).then(user => {
-            user.send(facistMsg);
+        db.drawPolicy(function (cards) {
+            for (var j = 0; j < 3; j++) {
+                if (cards[j] == "Liberal") {
+                    client.users.fetch(message.author.id).then(user => {
+                        user.send(liberalMsg);
+                    });
+                }
+                else {
+                    client.users.fetch(message.author.id).then(user => {
+                        user.send(facistMsg);
+                    });
+                }
+            }
         });
-        client.users.fetch(message.author.id).then(user => {
-            user.send(liberalMsg);
-        });
-        //db.drawPolicy(function (cards) {
-        //    for (var j = 0; j < 3; j++) {
-        //        client.users.fetch(message.author.id).then(user => {
-        //            user.send(embedMsg);
-        //        });
-        //        console.log("uhhh...???");
-        //        console.log(cards[j]);
-        //    }
-        //});
         //runGame(message);
     },
 };
