@@ -182,10 +182,10 @@ async function policyCountExport(callback) {
     var dataCount = dataStore.length
     for (var i = 0; i < dataCount; i++) {
         if (await dataStore[i]._rawData[0] == "Liberal") {
-            liberalCount++;
+            liberalPolicies++;
         }
         if (await dataStore[i]._rawData[0] == "Facist") {
-            facistCount++;
+            facistPolicies++;
         }
     }
     callback(facistPolicies, liberalPolicies);
