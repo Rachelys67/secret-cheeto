@@ -9,7 +9,7 @@ async function deleteMessages(channel) {
     channel.bulkDelete(fetched);
 }
 
-async function determineFacistLink(facistPolicies) {
+async function determineFacistLink(facistPolicies, callback) {
     //get # players
     var returnURL = "";
     db.exportGetAllPlayers(function (players) {
@@ -76,9 +76,8 @@ async function determineFacistLink(facistPolicies) {
                 returnURL = "";
             }
         }
+        callback(returnURL);
     });
-    console.log(returnURL);
-    return returnURL;
 }
 
 module.exports = {
@@ -130,21 +129,21 @@ module.exports = {
                 else {
                     liberalLink = "https://i.imgur.com/iIKsWmn.png";
                 }
-                facistLink = await determineFacistLink(facistPolicies);
+                await determineFacistLink(facistPolicies, function (facistLink) {
+                    let facistMsg = new Discord.MessageEmbed()
+                        .setImage(facistLink)
+                        .setTitle('Current Facist Board')
+                        .setColor('#a83432')
+                        ;
+                    channel.send(facistMsg);
+                });
                 console.log(facistLink);
-
-                let facistMsg = new Discord.MessageEmbed()
-                    .setImage(facistLink)
-                    .setTitle('Current Facist Board')
-                    .setColor('#a83432')
-                    ;
 
                 let liberalMsg = new Discord.MessageEmbed()
                     .setImage(liberalLink)
                     .setTitle('Current Liberal Board')
                     .setColor('#3275a8')
                     ;
-                channel.send(facistMsg);
                 channel.send(liberalMsg);
             });
         });
