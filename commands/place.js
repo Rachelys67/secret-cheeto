@@ -18,22 +18,22 @@ async function determineFacistLink(facistPolicies, callback) {
         console.log(playerCount);
         if (playerCount > 8) {
             if (facistPolicies == 0) {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/VWimQ3B.jpeg";
             }
             else if (facistPolicies == 1) {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/Cxd4UnA.jpeg";
             }
             else if (facistPolicies == 2) {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/RlkcVfQ.jpeg";
             }
             else if (facistPolicies == 3) {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/JVXqI3A.jpeg";
             }
             else if (facistPolicies == 4) {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/xM8q0TC.jpeg";
             }
             else {
-                returnURL = "";
+                returnURL = "https://i.imgur.com/ARyDOwW.jpeg";
             }
         }
         else if (playerCount > 6) {
