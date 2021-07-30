@@ -15,6 +15,7 @@ async function determineFacistLink(facistPolicies) {
     db.exportGetAllPlayers(function (players) {
         //determine board state based on players & policies
         var playerCount = players.length;
+        console.log(playerCount);
         if (playerCount > 8) {
             if (facistPolicies == 0) {
                 returnURL = "";
@@ -76,6 +77,7 @@ async function determineFacistLink(facistPolicies) {
             }
         }
     });
+    console.log(returnURL);
     return returnURL;
 }
 
