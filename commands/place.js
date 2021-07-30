@@ -141,22 +141,23 @@ module.exports = {
             }
             facistLink = await determineFacistLink(facistPolicies);
             console.log(facistLink);
+
+            let facistMsg = new Discord.MessageEmbed()
+                .setImage(facistLink)
+                .setTitle('Current Facist Board')
+                .setColor('#a83432')
+                ;
+
+            let liberalMsg = new Discord.MessageEmbed()
+                .setImage(liberalLink)
+                .setTitle('Current Liberal Board')
+                .setColor('#3275a8')
+                ;
+            channel.send(facistMsg);
+            channel.send(liberalMsg);
         });
         
 
 
-        let facistMsg = new Discord.MessageEmbed()
-            .setImage(facistLink)
-            .setTitle('Current Facist Board')
-            .setColor('#a83432')
-            ;
-
-        let liberalMsg = new Discord.MessageEmbed()
-            .setImage(liberalLink)
-            .setTitle('Current Liberal Board')
-            .setColor('#3275a8')
-            ;
-        channel.send(facistMsg);
-        channel.send(liberalMsg);
     },
 };
