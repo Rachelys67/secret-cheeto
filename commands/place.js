@@ -94,6 +94,7 @@ module.exports = {
                 .setColor('#008000')
                 .addField("Disallowed!", "You MUST put a policy of Facist or Liberal");
             message.channel.send(msgEmbed);
+            return;
         }
         var policyName = issuedCommand[1];
         if (policyName != "Liberal" || policyName != "Facist") {
@@ -102,6 +103,7 @@ module.exports = {
                 .setColor('#008000')
                 .addField("Disallowed!", "You MUST put a policy of Facist or Liberal");
             message.channel.send(msgEmbed);
+            return;
         }
         //const channel = client.channels.cache.find(channel => channel.name === "current-board");
         let channel = message.guild.channels.cache.find(
@@ -114,7 +116,7 @@ module.exports = {
 
         var liberalLink = "";
         var facistLink = "";
-        db.getPolicyCounts(async function (liberalPolicies, facistPolicies) {
+        db.getPolicyCounts(async function (facistPolicies, liberalPolicies) {
             if (liberalPolicies == 0) {
                 liberalLink = "https://i.imgur.com/FlmXDry.png";
             }

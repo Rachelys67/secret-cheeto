@@ -175,6 +175,21 @@ async function shuffleRemainingPolicies(facistPolicies, liberalPolicies) {
     }
 }
 
+async function policyCountExport(callback) {
+    const dataStore = await retrieveDataSource(policyInPlaySheet);
+    var liberalPolicies = 0;
+    var facistPolicies = 0;
+    for (var i = 0; i < dataCount; i++) {
+        if (await dataStore[i]._rawData[0] == "Liberal") {
+            liberalCount++;
+        }
+        if (await dataStore[i]._rawData[0] == "Facist") {
+            facistCount++;
+        }
+    }
+    callback(facistPolicies, liberalPolicies);
+}
+
 async function playPolicy(policyName) {
     const sheet = await initializeDataSource(policyInPlaySheet);
     console.log("initilized... updating...");
@@ -226,5 +241,8 @@ module.exports = {
     },
     expPlayPolicy: async function (policyName) {
         await playPolicy(policyName);
+    },
+    getPolicyCounts: function (callback) {
+        policyCountExport(callback);
     }
 };
