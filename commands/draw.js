@@ -16,7 +16,7 @@ module.exports = {
     description: 'draws 3 cards',
     execute(message, args) {
         const discCommand = message.content;
-        //console.log("hello??");
+        console.log("hello??");
 
         let facistMsg = new Discord.MessageEmbed()
             .setImage('../img/facisttile.png')
