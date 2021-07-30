@@ -30,7 +30,9 @@ module.exports = {
             .setColor('#3275a8')
             ;
         db.drawPolicy(function (cards) {
+            var policies = "";
             for (var j = 0; j < 3; j++) {
+                policies = cards[j] + " ";
                 if (cards[j] == "Liberal") {
                     client.users.fetch(message.author.id).then(user => {
                         user.send(liberalMsg);
@@ -42,6 +44,13 @@ module.exports = {
                     });
                 }
             }
+            let allPolicies = new Discord.MessageEmbed()
+                .setTitle('Policies Drawn')
+                .addField('Policies', policies);
+            client.users.fetch(message.author.id).then(user => {
+                user.send(allPolicies);
+            });
+
         });
         //runGame(message);
     },
