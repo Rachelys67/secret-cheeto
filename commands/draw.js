@@ -32,7 +32,7 @@ module.exports = {
         db.drawPolicy(function (cards) {
             var policies = "";
             for (var j = 0; j < 3; j++) {
-                policies = cards[j] + " ";
+                policies = policies + cards[j] + " ";
                 if (cards[j] == "Liberal") {
                     client.users.fetch(message.author.id).then(user => {
                         user.send(liberalMsg);
