@@ -118,44 +118,45 @@ module.exports = {
         await deleteMessages(channel);
         console.log("exp...");
         //channel.send('test?');
-        await db.expPlayPolicy(policyName);
+        await db.expPlayPolicy(policyName, function () {
+            db.getPolicyCounts(async function (facistPolicies, liberalPolicies) {
+                if (liberalPolicies == 0) {
+                    liberalLink = "https://i.imgur.com/FlmXDry.png";
+                }
+                else if (liberalPolicies == 1) {
+                    liberalLink = "https://i.imgur.com/MVLjFiP.png";
+                }
+                else if (liberalPolicies == 2) {
+                    liberalLink = "https://i.imgur.com/e0XaSbu.png";
+                }
+                else if (liberalPolicies == 3) {
+                    liberalLink = "https://i.imgur.com/dFEkcBU.png";
+                }
+                else {
+                    liberalLink = "https://i.imgur.com/iIKsWmn.png";
+                }
+                facistLink = await determineFacistLink(facistPolicies);
+                console.log(facistLink);
+
+                let facistMsg = new Discord.MessageEmbed()
+                    .setImage(facistLink)
+                    .setTitle('Current Facist Board')
+                    .setColor('#a83432')
+                    ;
+
+                let liberalMsg = new Discord.MessageEmbed()
+                    .setImage(liberalLink)
+                    .setTitle('Current Liberal Board')
+                    .setColor('#3275a8')
+                    ;
+                channel.send(facistMsg);
+                channel.send(liberalMsg);
+            });
+        });
         console.log("do we error before or after???");
 
         var liberalLink = "";
         var facistLink = "";
-        await db.getPolicyCounts(async function (facistPolicies, liberalPolicies) {
-            if (liberalPolicies == 0) {
-                liberalLink = "https://i.imgur.com/FlmXDry.png";
-            }
-            else if (liberalPolicies == 1) {
-                liberalLink = "https://i.imgur.com/MVLjFiP.png";
-            }
-            else if (liberalPolicies == 2) {
-                liberalLink = "https://i.imgur.com/e0XaSbu.png";
-            }
-            else if (liberalPolicies == 3) {
-                liberalLink = "https://i.imgur.com/dFEkcBU.png";
-            }
-            else {
-                liberalLink = "https://i.imgur.com/iIKsWmn.png";
-            }
-            facistLink = await determineFacistLink(facistPolicies);
-            console.log(facistLink);
-
-            let facistMsg = new Discord.MessageEmbed()
-                .setImage(facistLink)
-                .setTitle('Current Facist Board')
-                .setColor('#a83432')
-                ;
-
-            let liberalMsg = new Discord.MessageEmbed()
-                .setImage(liberalLink)
-                .setTitle('Current Liberal Board')
-                .setColor('#3275a8')
-                ;
-            channel.send(facistMsg);
-            channel.send(liberalMsg);
-        });
         
 
 

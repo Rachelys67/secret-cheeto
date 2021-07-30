@@ -191,11 +191,13 @@ async function policyCountExport(callback) {
     callback(facistPolicies, liberalPolicies);
 }
 
-async function playPolicy(policyName) {
+async function playPolicy(policyName, callback) {
     const sheet = await initializeDataSource(policyInPlaySheet);
     console.log("initilized... updating...");
     var userToUpdate =
-        sheet.addRow({ Policy: policyName })
+        sheet.addRow({ Policy: policyName });
+
+    callback();
 }
 
 module.exports = {
@@ -240,10 +242,10 @@ module.exports = {
         clearData(policyDeck);
         shuffleRemainingPolicies(facistPolicies, liberalPolicies);
     },
-    expPlayPolicy: async function (policyName) {
-        await playPolicy(policyName);
+    expPlayPolicy: async function (policyName, callback) {
+        await playPolicy(policyName, callback);
     },
-    getPolicyCounts: async function (callback) {
+    getPolicyCounts: function (callback) {
         policyCountExport(callback);
     }
 };
