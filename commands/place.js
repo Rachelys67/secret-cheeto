@@ -76,6 +76,9 @@ async function determineFacistLink(facistPolicies, callback) {
                 returnURL = "";
             }
         }
+        console.log(playerCount);
+        console.log(facistPolicies);
+        console.log(returnURL);
         callback(returnURL);
     });
 }
