@@ -123,7 +123,7 @@ module.exports = {
 
         var liberalLink = "";
         var facistLink = "";
-        db.getPolicyCounts(async function (facistPolicies, liberalPolicies) {
+        await db.getPolicyCounts(async function (facistPolicies, liberalPolicies) {
             if (liberalPolicies == 0) {
                 liberalLink = "https://i.imgur.com/FlmXDry.png";
             }

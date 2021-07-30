@@ -243,7 +243,7 @@ module.exports = {
     expPlayPolicy: async function (policyName) {
         await playPolicy(policyName);
     },
-    getPolicyCounts: function (callback) {
+    getPolicyCounts: async function (callback) {
         policyCountExport(callback);
     }
 };
