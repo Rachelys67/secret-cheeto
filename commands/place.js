@@ -85,22 +85,21 @@ module.exports = {
     description: 'places 1 card',
     async execute(message, args) {
         const discCommand = message.content;
-        console.log("hello??");
 
         const issuedCommand = discCommand.split(" ");
         if (issuedCommand.length < 2) {
 
             const msgEmbed = new Discord.MessageEmbed()
-                .setColor('#008000')
+                .setColor('#FF0000')
                 .addField("Disallowed!", "You MUST put a policy of Facist or Liberal");
             message.channel.send(msgEmbed);
             return;
         }
         var policyName = issuedCommand[1];
-        if (policyName != "Liberal" || policyName != "Facist") {
+        if (policyName != "Liberal" && policyName != "Facist") {
 
             const msgEmbed = new Discord.MessageEmbed()
-                .setColor('#008000')
+                .setColor('#FF0000')
                 .addField("Disallowed!", "You MUST put a policy of Facist or Liberal");
             message.channel.send(msgEmbed);
             return;
