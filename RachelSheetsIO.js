@@ -179,6 +179,7 @@ async function policyCountExport(callback) {
     const dataStore = await retrieveDataSource(policyInPlaySheet);
     var liberalPolicies = 0;
     var facistPolicies = 0;
+    var dataCount = dataStore.length
     for (var i = 0; i < dataCount; i++) {
         if (await dataStore[i]._rawData[0] == "Liberal") {
             liberalCount++;

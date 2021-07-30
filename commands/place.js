@@ -123,25 +123,25 @@ module.exports = {
 
         var liberalLink = "";
         var facistLink = "";
-        db.getPolicyCounts(async function (facistPolicies, liberalPolicies) {
-            if (liberalPolicies == 0) {
-                liberalLink = "https://i.imgur.com/FlmXDry.png";
-            }
-            else if (liberalPolicies == 1) {
-                liberalLink = "https://i.imgur.com/MVLjFiP.png";
-            }
-            else if (liberalPolicies == 2) {
-                liberalLink = "https://i.imgur.com/e0XaSbu.png";
-            }
-            else if (liberalPolicies == 3) {
-                liberalLink = "https://i.imgur.com/dFEkcBU.png";
-            }
-            else {
-                liberalLink = "https://i.imgur.com/iIKsWmn.png";
-            }
-            facistLink = await determineFacistLink(facistPolicies);
-            console.log(facistLink);
-        });
+        //db.getPolicyCounts(async function (facistPolicies, liberalPolicies) {
+        //    if (liberalPolicies == 0) {
+        //        liberalLink = "https://i.imgur.com/FlmXDry.png";
+        //    }
+        //    else if (liberalPolicies == 1) {
+        //        liberalLink = "https://i.imgur.com/MVLjFiP.png";
+        //    }
+        //    else if (liberalPolicies == 2) {
+        //        liberalLink = "https://i.imgur.com/e0XaSbu.png";
+        //    }
+        //    else if (liberalPolicies == 3) {
+        //        liberalLink = "https://i.imgur.com/dFEkcBU.png";
+        //    }
+        //    else {
+        //        liberalLink = "https://i.imgur.com/iIKsWmn.png";
+        //    }
+        //    facistLink = await determineFacistLink(facistPolicies);
+        //    console.log(facistLink);
+        //});
         
 
 
