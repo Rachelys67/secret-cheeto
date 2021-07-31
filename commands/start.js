@@ -85,6 +85,9 @@ function runGame(discMsg) {
     var playersPicked = 0;
     console.log("starting game...");
     db.exportGetAllPlayers(function (players) {
+        var facists = [];
+        var hitler = '';
+        var facistCount = 0;
         console.log(players.length);
         if (players.length >= 5) {
             playersPicked = players.length;
@@ -101,6 +104,15 @@ function runGame(discMsg) {
                 //the exclamation symbol comes if the user has a nickname on the server.
                 let id = str.replace(/[<@!>]/g, '');
                 let client = discMsg.channel.client;
+                
+
+                if (getRoleNameFromId(role, players.length) == "Facist") {
+                    facists[facistCount] = players[i]._rawData[0];
+                    facistCount++;
+                }
+                if (getRoleNameFromId(role, players.length) == "Cheeto in Chief") {
+                    hitler = players[i]._rawData[0];
+                }
                 let clientMsg = "Your role is..." + getRoleNameFromId(role, players.length);
 
                 let embedMsg = new Discord.MessageEmbed()
@@ -111,6 +123,23 @@ function runGame(discMsg) {
                     user.send(embedMsg);
                 });
             }
+            for (var i = 0; i < facists.length; i++) {
+                var fellowFacists = "";
+                for (var j = 0; j < facists.length; j++) {
+                    var facistName = client.users.cache.get(facists[i]);
+                    fellowFacists = fellowFacists + " " + facistName;
+                }
+
+                fellowFacists + " and your Hitler is " + client.users.cache.get(hitler);
+
+                let embedMsg = new Discord.MessageEmbed()
+                    .addField("Fellow Facists", fellowFacists)
+                    ;
+                client.users.fetch(id).then(user => {
+                    user.send(embedMsg);
+                });
+            }
+            //client.users.cache.get('189911161091784704');
             db.startGame();
 
         }
