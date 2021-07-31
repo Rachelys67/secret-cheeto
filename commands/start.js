@@ -124,6 +124,8 @@ function runGame(discMsg) {
                 });
             }
             for (var i = 0; i < facists.length; i++) {
+
+                let client = discMsg.channel.client;
                 var fellowFacists = "";
                 for (var j = 0; j < facists.length; j++) {
                     var facistName = client.users.cache.get(facists[i]);
