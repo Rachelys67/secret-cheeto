@@ -128,7 +128,7 @@ function runGame(discMsg) {
                 let client = discMsg.channel.client;
                 var fellowFacists = "";
                 for (var j = 0; j < facists.length; j++) {
-                    var facistName = client.users.cache.get(facists[i]);
+                    var facistName = client.users.cache.get(facists[j]);
                     fellowFacists = fellowFacists + " " + facistName;
                 }
                 fellowFacists + " and your Hitler is " + client.users.cache.get(hitler);
@@ -136,7 +136,7 @@ function runGame(discMsg) {
                 let embedMsg = new Discord.MessageEmbed()
                     .addField("Fellow Facists", fellowFacists)
                     ;
-                client.users.fetch(id).then(user => {
+                client.users.fetch(facists[i]).then(user => {
                     user.send(embedMsg);
                 });
             }
