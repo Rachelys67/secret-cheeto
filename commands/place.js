@@ -135,7 +135,6 @@ module.exports = {
                         ;
                     channel.send(facistMsg);
                 });
-                console.log(facistLink);
 
                 let liberalMsg = new Discord.MessageEmbed()
                     .setImage(liberalLink)
