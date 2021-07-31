@@ -130,15 +130,17 @@ function runGame(discMsg) {
                 for (var j = 0; j < facists.length; j++) {
                     var facistName = client.users.cache.get(facists[j]);
                     fellowFacists = fellowFacists + " " + facistName;
+                    client.users.fetch(facists[i]).then(user => {
+                        user.send(facistName);
+                    });
                 }
-                fellowFacists = fellowFacists + " and your Hitler is " + client.users.cache.get(hitler);
-
-                let embedMsg = new Discord.MessageEmbed()
-                    .addField("Fellow Facists", fellowFacists)
-                    ;
                 client.users.fetch(facists[i]).then(user => {
-                    user.send(embedMsg);
+                    user.send("hitler is" + client.users.cache.get(hitler));
                 });
+
+                //let embedMsg = new Discord.MessageEmbed()
+                //    .addField("Fellow Facists", fellowFacists)
+                    ;
             }
             //client.users.cache.get('189911161091784704');
             db.startGame();
