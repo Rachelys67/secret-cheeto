@@ -129,10 +129,12 @@ function runGame(discMsg) {
                 var fellowFacists = "";
                 for (var j = 0; j < facists.length; j++) {
                     var facistName = client.users.cache.get(facists[j]);
+                    console.log(facists[j]);
+                    console.log(facistName);
                     fellowFacists = fellowFacists + " " + facistName;
-                    client.users.fetch(facists[i]).then(user => {
-                        user.send(facistName);
-                    });
+                    //client.users.fetch(facists[i]).then(user => {
+                     //   user.send(facistName);
+                    //});
                 }
                 client.users.fetch(facists[i]).then(user => {
                     user.send("hitler is" + client.users.cache.get(hitler));
